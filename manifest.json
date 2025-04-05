@@ -3,8 +3,6 @@
   "name": "Bigger Twitch Emote Picker",
   "version": "0.1.0",
   "description": "",
-  "permissions": ["tabs"],
-  "host_permissions": ["https://www.twitch.tv/*"],
   "content_scripts": [
     {
       "matches": ["https://www.twitch.tv/*"],
