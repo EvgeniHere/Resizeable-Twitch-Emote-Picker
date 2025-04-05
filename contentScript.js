@@ -18,10 +18,10 @@
     navScrollable.style.setProperty('height', `${value-100}px`, 'important');
   }
 
-  function setSize(width, height) {
+  /*function setSize(width, height) {
     setWidth(width);
     setHeight(height);
-  }
+  }*/
 
   function _attachResizer() {
     const resizer = document.createElement('div');
@@ -82,8 +82,6 @@
       navScrollable = document.querySelector('.emote-picker__nav-content-overflow');
 
       if (picker && mainScrollable && navScrollable) {
-        alreadyHandled = true;
-  
         //setSize(520, 800);
         _attachResizer();
 
