@@ -76,10 +76,10 @@
         const pickerWidth = window.getComputedStyle(picker).width;
         const pickerHeight = window.getComputedStyle(picker).height;
 
-        const minPopupWidth = parseFloat(pickerWidth);
-        const minPopupHeight = parseFloat(pickerHeight);
+        const minPickerWidth = parseFloat(pickerWidth);
+        const minPickerHeight = parseFloat(pickerHeight);
 
-        const resizer = _createResizer(picker, minPopupWidth, minPopupHeight);
+        const resizer = _createResizer(picker, minPickerWidth, minPickerHeight);
 
         picker.appendChild(resizer);
 
