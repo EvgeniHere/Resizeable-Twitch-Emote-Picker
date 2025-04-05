@@ -7,23 +7,18 @@
     init();
   }
 
-  function setWidth(value) {
+  function setPickerWidth(value) {
     picker.style.width = `${value}px`;
     picker.parentElement.style.width = `${value}px`;
   }
   
-  function setHeight(value) {
+  function setPickerHeight(value) {
     picker.style.height = `${value}px`;
     mainScrollable.style.setProperty('height', `${value-50}px`, 'important');
     navScrollable.style.setProperty('height', `${value-100}px`, 'important');
   }
 
-  /*function setSize(width, height) {
-    setWidth(width);
-    setHeight(height);
-  }*/
-
-  function _attachResizer() {
+  function _createResizer(element, minWidth, minHeight) {
     const resizer = document.createElement('div');
     resizer.style.position = 'absolute';
     resizer.style.top = '0';
@@ -33,10 +28,6 @@
     resizer.style.cursor = 'nw-resize';
     resizer.style.background = 'rgba(0,0,0,0.3)';
     resizer.style.zIndex = '9999';
-    
-    const minWidth = parseFloat(window.getComputedStyle(picker).width);
-
-    console.log(minWidth);
 
     resizer.addEventListener('mousedown', (e) => {
       e.preventDefault();
@@ -44,8 +35,8 @@
     
       const startX = e.clientX;
       const startY = e.clientY;
-      const startWidth = picker.offsetWidth;
-      const startHeight = picker.offsetHeight;
+      const startWidth = element.offsetWidth;
+      const startHeight = element.offsetHeight;
     
       function onMouseMove(e) {
         const dx = startX - e.clientX;
@@ -55,11 +46,11 @@
         const newHeight = startHeight + dy;
     
         if (newWidth >= minWidth) {
-          setWidth(newWidth);
+          setPickerWidth(newWidth);
         }
     
-        if (newHeight > 300) {
-          setHeight(newHeight);
+        if (newHeight > minHeight) {
+          setPickerHeight(newHeight);
         }
       }
     
@@ -72,7 +63,7 @@
       window.addEventListener('mouseup', onMouseUp);
     });
 
-    picker.appendChild(resizer);
+    return resizer;
   }
 
   function init() {
@@ -82,8 +73,17 @@
       navScrollable = document.querySelector('.emote-picker__nav-content-overflow');
 
       if (picker && mainScrollable && navScrollable) {
-        //setSize(520, 800);
-        _attachResizer();
+        const pickerWidth = window.getComputedStyle(picker).width;
+        const pickerHeight = window.getComputedStyle(picker).height;
+
+        const minPopupWidth = parseFloat(pickerWidth);
+        const minPopupHeight = parseFloat(pickerHeight);
+
+        const resizer = _createResizer(picker, minPopupWidth, minPopupHeight);
+
+        picker.appendChild(resizer);
+
+        picker.style.overflow = 'hidden';
 
         console.log('[Extension] Emote picker modified');
 
