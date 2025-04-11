@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "Bigger Twitch Emote Picker",
-  "version": "0.1.0",
+  "name": "Resizable Twitch Emote Picker",
+  "version": "0.1.1",
   "description": "",
   "content_scripts": [
     {
